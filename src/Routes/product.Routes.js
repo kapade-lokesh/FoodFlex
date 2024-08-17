@@ -5,10 +5,13 @@ import {
   deleteProduct,
   getProduct,
 } from "../Controllers/product.Controller.js";
+import { isAdmin, isLoggedin } from "../validators/auth.Validator.js";
 
 const productRoutes = express.Router();
 
-productRoutes.route("/addproduct").post(upload.single("image"), createProduct);
+productRoutes
+  .route("/addproduct")
+  .post(isLoggedin, isAdmin, upload.single("image"), createProduct);
 productRoutes.route("/getproduct/:id").post(getProduct);
 productRoutes.route("/deleteproduct/:id").post(deleteProduct);
 export { productRoutes };

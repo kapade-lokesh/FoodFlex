@@ -1,8 +1,8 @@
 import { ApiResponse } from "../Utils/ApiResponse.js";
 import { UnaunthorizedError } from "../Utils/UnauthorizedError.js";
 import jwt from "jsonwebtoken";
+
 const isLoggedin = async (req, res, next) => {
-  console.log(req.cookies);
   const token = req.cookies["authToken"];
 
   if (!token) {
@@ -18,19 +18,11 @@ const isLoggedin = async (req, res, next) => {
       throw new UnaunthorizedError();
     }
 
-    console.log(req.user);
-
-    console.log(`
-      
-      
-      `);
-
     req.user = {
       email: decode.email,
       id: decode.id,
+      role: decode.role,
     };
-
-    console.log(req.user);
 
     next();
   } catch (error) {
@@ -38,4 +30,14 @@ const isLoggedin = async (req, res, next) => {
   }
 };
 
-export { isLoggedin };
+const isAdmin = async (req, res, next) => {
+  const loginUser = req.user;
+  console.log(loginUser);
+  if (loginUser.role === "ADMIN") {
+    next();
+  } else {
+    throw new UnaunthorizedError();
+  }
+};
+
+export { isLoggedin, isAdmin };
