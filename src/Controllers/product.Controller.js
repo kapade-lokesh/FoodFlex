@@ -7,6 +7,7 @@ import { ApiError } from "../Utils/ApiError.js";
 import { ApiResponse } from "../Utils/ApiResponse.js";
 
 const createProduct = async (req, res) => {
+   
   try {
     const response = await addproduct({
       ...req.body,

@@ -38,6 +38,7 @@ const userSchema = Schema(
     role: {
       type: String,
       enum: ["USER", "ADMIN"],
+      default: "USER",
     },
   },
   { timestamp: true }

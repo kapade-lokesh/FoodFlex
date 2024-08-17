@@ -36,7 +36,7 @@ const isAdmin = async (req, res, next) => {
   if (loginUser.role === "ADMIN") {
     next();
   } else {
-    throw new UnaunthorizedError();
+    res.status(401).json(new ApiResponse(false, 401, {}, "unathorized user"));
   }
 };
 
