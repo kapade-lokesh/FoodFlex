@@ -25,6 +25,7 @@ const createUser = async (parameter) => {
       throw new BadReqError(errorlist);
     }
 
+    console.log(error);
     throw new InternalServerError();
   }
 };

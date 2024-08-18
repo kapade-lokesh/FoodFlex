@@ -14,7 +14,7 @@ const cartSchema = Schema(
       {
         product: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "product",
+          ref: "Product",
           required: true,
         },
 
@@ -25,6 +25,10 @@ const cartSchema = Schema(
         },
       },
     ],
+    price: {
+      type: Number,
+      default:0
+    }
   },
   { timestapms: true }
 );
