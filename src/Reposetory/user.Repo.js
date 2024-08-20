@@ -3,9 +3,13 @@ import { BadReqError } from "../Utils/BadReqError.js";
 import { InternalServerError } from "../Utils/InternalServerError.js";
 
 const findUser = async (parameter) => {
-  const { mobile, email } = parameter;
+  const { mobile, email, _id } = parameter;
+  console.log(_id);
   try {
-    const response = await User.findOne({ $or: [{ mobile }, { email }] });
+    const response = await User.findOne({
+      $or: [{ mobile }, { email }, { _id }],
+    });
+
     return response;
   } catch (error) {
     console.log(error);

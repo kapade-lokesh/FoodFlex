@@ -40,6 +40,11 @@ const userSchema = Schema(
       enum: ["USER", "ADMIN"],
       default: "USER",
     },
+
+    address: {
+      type: String,
+      minlength: [10, "address must be 10 characters long"],
+    },
   },
   { timestamp: true }
 );
