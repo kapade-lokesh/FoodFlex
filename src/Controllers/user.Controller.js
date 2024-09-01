@@ -5,10 +5,10 @@ import { ApiResponse } from "../Utils/ApiResponse.js";
 const CreateUser = async (req, res) => {
   try {
     const response = await registerUser(req.body);
-    console.log(response);
+    console.log(req.body);
     return res
       .status(200)
-      .json(new ApiResponse(200, "user created sucessfully", response));
+      .json(new ApiResponse(true, 200, response, "user created sucessfully"));
   } catch (error) {
     if (error instanceof ApiError) {
       console.log(error);
@@ -31,7 +31,7 @@ const GetallUsers = async (req, res) => {
     const response = await getall();
     return res
       .status(200)
-      .json(new ApiResponse(true, "users fetched", response, {}));
+      .json(new ApiResponse(true, 200, response, "users fetched"));
   } catch (error) {
     if (error instanceof ApiError) {
       return res

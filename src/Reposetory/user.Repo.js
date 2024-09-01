@@ -4,12 +4,13 @@ import { InternalServerError } from "../Utils/InternalServerError.js";
 
 const findUser = async (parameter) => {
   const { mobile, email, _id } = parameter;
-  console.log(_id);
   try {
     const response = await User.findOne({
       $or: [{ mobile }, { email }, { _id }],
     });
-
+    // if (response) {
+    //   throw{message:'user with mobile or email already exists'}
+    // }
     return response;
   } catch (error) {
     console.log(error);
@@ -17,9 +18,15 @@ const findUser = async (parameter) => {
 };
 
 const createUser = async (parameter) => {
-  const { username, email, mobile, password } = parameter;
+  const { username, email, mobile, password, address } = parameter;
   try {
-    const response = await User.create({ username, email, mobile, password });
+    const response = await User.create({
+      username,
+      email,
+      mobile,
+      password,
+      address,
+    });
     return response;
   } catch (error) {
     if (error.name === "ValidationError") {

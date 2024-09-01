@@ -10,7 +10,12 @@ import { orderRoutes } from "./Routes/order.Routes.js";
 const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("server is fine how are you buddy");

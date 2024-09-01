@@ -3,11 +3,20 @@ import { createUser, findUser, getUsers } from "../Reposetory/user.Repo.js";
 import { InternalServerError } from "../Utils/InternalServerError.js";
 
 const registerUser = async (userDetails) => {
-  const { username, email, mobile, password } = userDetails;
-  const user = await findUser({ username, email });
+  const { username, email, mobile, password,address } = userDetails;
+  const user = await findUser({ mobile, email });
 
   if (user) {
-    throw { massage: "user already exist !!", statusCode: 400 };
+    if (user.email === email && user.mobile === mobile) {
+      throw { massage: "user already exist !!", statusCode: 400 };
+    }
+
+    if (user.email === email || user.mobile === mobile) {
+      throw {
+        massage: "user already exist with same e-mail id or mobile No. !!",
+        statusCode: 400,
+      };
+    }
   }
 
   const newUser = await createUser({
@@ -15,7 +24,9 @@ const registerUser = async (userDetails) => {
     email,
     mobile,
     password,
+    address,
   });
+
 
   if (!newUser) {
     throw new InternalServerError();
