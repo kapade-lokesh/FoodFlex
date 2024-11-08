@@ -32,7 +32,15 @@ const loginUser = async (userDetails) => {
     }
   );
 
-  return accessToken;
+  return {
+    accessToken,  
+    userData: {
+      email: user.email,
+      role: user.role,
+      mobile: user.mobile,
+      name: user.username,
+    },
+  };
 };
 
 export { loginUser };

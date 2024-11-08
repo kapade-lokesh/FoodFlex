@@ -8,12 +8,13 @@ const registerUser = async (userDetails) => {
 
   if (user) {
     if (user.email === email && user.mobile === mobile) {
-      throw { massage: "user already exist !!", statusCode: 400 };
+      throw { message: "user already exist !!", 
+        statusCode: 400 };
     }
 
     if (user.email === email || user.mobile === mobile) {
       throw {
-        massage: "user already exist with same e-mail id or mobile No. !!",
+        message: "user already exist with same e-mail id or mobile No. !!",
         statusCode: 400,
       };
     }
@@ -32,7 +33,7 @@ const registerUser = async (userDetails) => {
     throw new InternalServerError();
   }
 
-  const cart = await createCart(newUser._id);
+ const cart = await createCart(newUser._id);
   if (!cart) {
     throw new InternalServerError();
   }

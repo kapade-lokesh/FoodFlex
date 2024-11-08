@@ -8,9 +8,6 @@ const findUser = async (parameter) => {
     const response = await User.findOne({
       $or: [{ mobile }, { email }, { _id }],
     });
-    // if (response) {
-    //   throw{message:'user with mobile or email already exists'}
-    // }
     return response;
   } catch (error) {
     console.log(error);

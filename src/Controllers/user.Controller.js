@@ -8,21 +8,18 @@ const CreateUser = async (req, res) => {
     console.log(req.body);
     return res
       .status(200)
-      .json(new ApiResponse(true, 200, response, "user created sucessfully"));
+      .json(new ApiResponse(true, 200, response, "User Registered sucessfully"));
   } catch (error) {
     if (error instanceof ApiError) {
       console.log(error);
-      console.log("inside of if");
       return res
         .status(error.statusCode)
-        .json(new ApiResponse(false, error.message, {}, error));
+        .json(new ApiResponse(false, error.statusCode, {}, error.message));
     }
 
-    console.log(error);
-    console.log("out of if");
     return res
       .status(error.statusCode)
-      .json(new ApiResponse(false, error.message, {}, error));
+      .json(new ApiResponse(false, error.statusCode, {}, error.message));
   }
 };
 
