@@ -26,7 +26,21 @@ const isLoggedin = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log(error);
+    if (error.name === "TokenExpiredError") {
+      return res
+        .status(401)
+        .json(new ApiResponse(false, 401, {}, "Token has expired"));
+    }
+
+    if (error.name === "JsonWebTokenError") {
+      return res
+        .status(401)
+        .json(new ApiResponse(false, 401, {}, "Invalid Token"));
+    }
+
+    return res
+      .status(500)
+      .json(new ApiResponse(false, 500, {}, "Internal server error"));
   }
 };
 

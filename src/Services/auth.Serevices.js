@@ -32,8 +32,11 @@ const loginUser = async (userDetails) => {
     }
   );
 
+  const expiryTime = Date.now() + process.env.JWT_EXPIRY * 1000;
+
   return {
-    accessToken,  
+    accessToken,
+    expiryTime,
     userData: {
       email: user.email,
       role: user.role,
